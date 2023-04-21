@@ -1,6 +1,6 @@
 """
 
-time：2023.4.21
+time：2023.4.16
 cron: 23 0 * * *
 new Env('ikun签到');
 地址：https://ikuuu.eu/
@@ -72,13 +72,12 @@ class Ikun():
             bs = soup.find('span', {'class': 'counter'})
             syll = bs.text
             dl = soup.find('div', {'class': 'd-sm-none d-lg-inline-block'})
-            name= dl.text
+            name = dl.text
         except:
-            xx = f"[登录]：登录失败，请检查ck有效性：{self.ck}\n\n"
+            xx = f"[登录]：请检查ck有效性：{self.ck}\n\n"
             print(xx)
             self.msg += xx
             return self.msg
-            
 
         if r.status_code != 200:
             xx = f"[登录]：{name}\n[签到]：请求失败，请检查网络或者ck有效性：{self.ck}\n\n"
