@@ -1,6 +1,6 @@
 """
 
-time：2023.4.14
+time：2023.4.15
 cron: 0 8 * * *
 new Env('glados签到');
 地址：https://glados.rocks
