@@ -1,6 +1,6 @@
 """
 
-updatetime：2023.4.21
+time：2023.4.21
 cron: 23 0 * * *
 new Env('ikun签到');
 地址：https://ikuuu.eu/
