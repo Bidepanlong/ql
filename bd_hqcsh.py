@@ -96,7 +96,7 @@ class Hqcsh():
                 return self.msg
             return self.msg
         except Exception as e:
-            xx = f"[请求异常]：{e}\n\n"
+            xx = f"[请求异常]：稍后再试\n{e}\n\n"
             print(xx)
             self.msg += xx
             return self.msg
