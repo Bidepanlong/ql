@@ -1,6 +1,6 @@
 """
 
-time：2023.4.24
+time：2023.4.26
 cron: 0 9,18 * * *
 new Env('好奇车生活签到');
 微信小程序-好奇车生活-好物兑换
@@ -86,7 +86,11 @@ class Hqcsh():
 
             if sign_rsp.json()['success'] == True:
                 if sign_rsp.json()['result']['success'] == True:
-                    if q_rsp.json()['result']['success'] == True:
+                    if q_rsp.json()['success'] == False:
+                        xx = f"[登录]：账号{a}登录成功\n[签到]：签到成功\n[积分]：{jf_rsp.json()['result']}\n[抢包]：当前不在抢包时间段，请在18-22点运行\n\n"
+                        print(xx)
+                        self.msg += xx
+                    elif q_rsp.json()['result']['success'] == True:
                         time.sleep(0.5)
                         qr_url = 'https://channel.cheryfs.cn/archer/activity-api/pointsmall/exchangeCardResult?resultKey=' + \
                                  q_rsp.json()['result']['id']
@@ -104,7 +108,11 @@ class Hqcsh():
                         print(xx)
                         self.msg += xx
                 elif sign_rsp.json()['result']['success'] == False:
-                    if q_rsp.json()['result']['success'] == True:
+                    if q_rsp.json()['success'] == False:
+                        xx = f"[登录]：账号{a}登录成功\n[签到]：{sign_rsp.json()['result']['message']}\n[积分]：{jf_rsp.json()['result']}\n[抢包]：当前不在抢包时间段，请在18-22点运行\n\n"
+                        print(xx)
+                        self.msg += xx
+                    elif q_rsp.json()['result']['success'] == True:
                         time.sleep(0.5)
                         qr_url = 'https://channel.cheryfs.cn/archer/activity-api/pointsmall/exchangeCardResult?resultKey=' + \
                                  q_rsp.json()['result']['id']
@@ -117,7 +125,7 @@ class Hqcsh():
                             xx = f"[登录]：账号{a}登录成功\n[签到]：{sign_rsp.json()['result']['message']}\n[积分]：{jf_rsp.json()['result']}\n[抢包]：{qr_rsp.json()['result']['errMsg']}\n\n"
                             print(xx)
                             self.msg += xx
-                    if q_rsp.json()['result']['success'] == False:
+                    elif q_rsp.json()['result']['success'] == False:
                         xx = f"[登录]：账号{a}登录成功\n[签到]：{sign_rsp.json()['result']['message']}\n[积分]：{jf_rsp.json()['result']}\n[抢包]：{q_rsp.json()['result']['errMsg']}\n\n"
                         print(xx)
                         self.msg += xx
@@ -147,7 +155,7 @@ if __name__ == '__main__':
     q3 = '622187928306601984'  # 588积分 3.88元
     q4 = '622188100122075136'  # 888积分 5.88元
     qiang = q1
-    print('\n默认设置自动抢188积分1.08元的包\n需要设置到脚本底部修改 qiang = xxx\nxxx为q1-q4对应的包\n')
+    print('\n默认设置自动抢188积分1.08元的包\n需要设置到脚本底部修改 qiang = xxx\nxxx为q1-q4对应的包\n注：抢包没有做循环，只提交一次可能会失败，可以在18点之后定时重复运行几次\n')
     token = get_environ("hqcshck")
     msg = ''
     cks = token.split("&")
