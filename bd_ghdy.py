@@ -91,9 +91,9 @@ class Ghdy():
             'app': 'XSB_DONGYANG',
         }
         try:
-            sign_rsp = requests.post(tx_url, headers=h, data=sgin_data)
-            time.sleep(0.5)
             q_rsp = requests.post(q_url, headers=h, data=q_data)
+            time.sleep(0.5)
+            sign_rsp = requests.post(tx_url, headers=h, data=sgin_data)
             time.sleep(3)
             tx_rsp = requests.post(tx_url, headers=h, data=tx_data)
             if sign_rsp.json()['status'] == True:
