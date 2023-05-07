@@ -1,12 +1,12 @@
 """
 
-time：2023.4.26
+time：2023.5.7
 cron: 2 0,12 * * *
-new Env('歌画东阳红包');
+new Env('歌画东阳');
 地址：https://app.tmuyun.com/webChannels/invite?inviteCode=BRHAB9&tenantId=49&accountId=6448adf9c790b07c90ca2591
 进入app-我的-抢红包或者在我的红包界面抓包
 提前在我的钱包里面绑定zfb号
-抓包域名: fzrhketh.act.tmuact.com 或者 wallet.act.tmuact.com
+抓包域名: fijdzpur.act.tmuact.com 或者 wallet.act.tmuact.com
 抓包请求体里面: account_id和session_id的值
 环境变量名称：ghdyck = account_id的值#session_id的值  注：用'#'号分开两个参数，顺序不要乱，先是account_id的值然后session_id的值
 多账号新建变量或者用 & 分开
@@ -58,7 +58,7 @@ class Ghdy():
     def sign(self):
         time.sleep(0.5)
         tx_url = "https://wallet.act.tmuact.com/activity/api.php"
-        q_url = "https://fzrhketh.act.tmuact.com/activity/api.php"
+        q_url = "https://fijdzpur.act.tmuact.com/activity/api.php"
 
         h = {
             "User-Agent": self.ua
@@ -78,8 +78,8 @@ class Ghdy():
             "action": "open",
             'account_id': self.ck[0],
             'session_id': self.ck[1],
-            "token": "9ca17ae2e6ffcda170e2e6eed8ec33ade987d3c952b6ef8fb2d45b828a9bb0d448adac97b0fb458296acb6cb2af0feaec3b92abbb2fca4c77ea1baa7b8ef5e878a9ab3c85e908baad9f770a2a9a697b43bf5a8ee9e",
-            "q": "YunSLfjFO",
+            "token": "",
+            "q": "YunSLfjZu",
         }
 
         tx_data = {
