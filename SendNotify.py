@@ -547,7 +547,7 @@ def send(title: str, content: str) -> None:
     hitokoto = push_config.get("HITOKOTO")
 
     text = one() if hitokoto else ""
-    content += "大自然的搬运工\n[https://bedee.top/]" + text
+    content += "大自然的搬运工\nhttps://bedee.top/" + text
 
     ts = [
         threading.Thread(target=mode, args=(title, content), name=mode.__name__)
