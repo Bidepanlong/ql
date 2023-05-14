@@ -1,12 +1,10 @@
 """
 
-time：2023.4.21
+time：2023.5.14
 cron: 23 0 * * *
 new Env('ikun签到');
 地址：https://ikuuu.eu/
-抓包域名: https://ikuuu.eu/user/checkin
-抓包请求头里面: cookie 的值全部复制到变量就行
-环境变量 ikunck = cookie的值
+环境变量 bd_ikun = 邮箱#密码
 多账号新建变量或者用 & 分开
 
 """
@@ -53,17 +51,34 @@ class Ikun():
     def __init__(self, ck):
         self.msg = ''
         self.ck = ck
+        self.cks = ""
 
     def sign(self):
         time.sleep(0.5)
         url = "https://ikuuu.eu/user/checkin"
         url1 = 'https://ikuuu.eu/user'
+        login_url = 'https://ikuuu.eu/auth/login'
 
-        headers = {
-            'Cookie': self.ck,
-            'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+        login_header = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
         }
 
+        data = {
+            'email': self.ck[0],
+            'passwd': self.ck[1],
+        }
+        response = requests.post(login_url, headers=login_header, data=data)
+        cookies = response.cookies
+        cookies_dict = cookies.get_dict()
+        for key, value in cookies_dict.items():
+            ck = f"{key}={value}"
+            self.cks += ck + ';'
+
+        headers = {
+            'Cookie': self.cks,
+            'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+        }
+        time.sleep(0.5)
         r = requests.post(url, headers=headers)
         time.sleep(0.5)
         r1 = requests.get(url1, headers=headers)
@@ -111,14 +126,13 @@ class Ikun():
 
 
 if __name__ == '__main__':
-    token = get_environ("ikunck")
+    token = get_environ("bd_ikun")
     msg = ''
     cks = token.split("&")
     print("检测到{}个ck记录\n开始ikun签到\n".format(len(cks)))
-    for ck in cks:
+    for ck_all in cks:
+        ck = ck_all.split("#")
         run = Ikun(ck)
         msg += run.get_sign_msg()
     if send:
         send("ikun签到通知", msg)
-
-
