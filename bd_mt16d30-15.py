@@ -1,7 +1,7 @@
 """
 
 time：2023.6.9
-cron: 57 59 15 * * *
+cron: 40 59 15 * * *
 new Env('美团16点30-15');
 自行抓包抢券接口，填写变量，不会抓包进群看群文件有视频。qq群:858019699
 bd_mtt = 抓取的完整cookie或者token=xxxxxxxxxxxxxxxx
