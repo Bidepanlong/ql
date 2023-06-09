@@ -193,7 +193,7 @@ def go_cqhttp(title: str, content: str) -> None:
         return
     print("go-cqhttp 服务启动")
 
-    url = f'{push_config.get("GOBOT_URL")}?access_token={push_config.get("GOBOT_TOKEN")}&{push_config.get("GOBOT_QQ")}&message=标题:{title}\n内容:{content}'
+    url = f'{push_config.get("GOBOT_URL")}?access_token={push_config.get("GOBOT_TOKEN")}&{push_config.get("GOBOT_QQ")}&message={title}\n{content}'
     response = requests.get(url).json()
 
     if response["status"] == "ok":
@@ -547,7 +547,7 @@ def send(title: str, content: str) -> None:
     hitokoto = push_config.get("HITOKOTO")
 
     text = one() if hitokoto else ""
-    content += "大自然的搬运工\nhttps://bedee.top/" + text
+    content += "大自然的搬运工\nQQ群：858019699" + text
 
     ts = [
         threading.Thread(target=mode, args=(title, content), name=mode.__name__)
