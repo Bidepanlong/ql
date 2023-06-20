@@ -1,9 +1,9 @@
 """
 
-time：2023.5.14
-cron: 23 0 * * *
+time：2023.6.20
+cron: 20 0 * * *
 new Env('ikun签到');
-地址：https://ikuuu.eu/
+地址：https://v2.zwtg888.com/auth/register?code=DTqz
 环境变量 bd_ikun = 邮箱#密码
 多账号新建变量或者用 & 分开
 
@@ -53,86 +53,107 @@ class Ikun():
         self.ck = ck
         self.cks = ""
 
-    def sign(self):
-        time.sleep(0.5)
-        url = "https://ikuuu.eu/user/checkin"
-        url1 = 'https://ikuuu.eu/user'
-        login_url = 'https://ikuuu.eu/auth/login'
-
-        login_header = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
-        }
-
-        data = {
-            'email': self.ck[0],
-            'passwd': self.ck[1],
-        }
-        response = requests.post(login_url, headers=login_header, data=data)
-        cookies = response.cookies
-        cookies_dict = cookies.get_dict()
-        for key, value in cookies_dict.items():
-            ck = f"{key}={value}"
-            self.cks += ck + ';'
-
-        headers = {
-            'Cookie': self.cks,
-            'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
-        }
-        time.sleep(0.5)
-        r = requests.post(url, headers=headers)
-        time.sleep(0.5)
-        r1 = requests.get(url1, headers=headers)
+    def qd(self):
         try:
-            soup = BeautifulSoup(r1.text, 'html.parser')
-            bs = soup.find('span', {'class': 'counter'})
-            syll = bs.text
-            dl = soup.find('div', {'class': 'd-sm-none d-lg-inline-block'})
-            name = dl.text
-        except:
-            xx = f"[登录]：请检查ck有效性：{self.ck}\n\n"
-            print(xx)
-            self.msg += xx
-            return self.msg
-
-        if r.status_code != 200:
-            xx = f"[登录]：{name}\n[签到]：请求失败，请检查网络或者ck有效性：{self.ck}\n\n"
-            print(xx)
-            self.msg += xx
-            return self.msg
-        try:
-            if "已经签到" in r.json()['msg']:
-                xx = f"[登录]：{name}\n[签到]：{r.json()['msg']}\n[流量]：{syll}GB\n\n"
-                print(xx)
-                self.msg += xx
-                return self.msg
-            elif "获得" in r.json()['msg']:
-                xx = f"[登录]：{name}\n[签到]：{r.json()['msg']}\n[流量]：{syll}GB\n\n"
-                print(xx)
-                self.msg += xx
-                return self.msg
+            time.sleep(0.5)
+            login_url = "https://v2.zwtg888.com/auth/login"
+            login_headers = {
+                'Host': 'v2.zwtg888.com',
+                'sec-ch-ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Microsoft Edge";v="114"',
+                'accept': 'application/json, text/javascript, */*; q=0.01',
+                'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'x-requested-with': 'XMLHttpRequest',
+                'sec-ch-ua-mobile': '?0',
+                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51',
+                'sec-ch-ua-platform': '"Windows"',
+                'origin': 'https://v2.zwtg888.com',
+                'sec-fetch-site': 'same-origin',
+                'sec-fetch-mode': 'cors',
+                'sec-fetch-dest': 'empty',
+                'referer': 'https://v2.zwtg888.com/auth/login',
+                'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
+            }
+            login_data = {
+                'email': self.ck[0],
+                'passwd': self.ck[1],
+            }
+            login_response = requests.post(login_url, headers=login_headers, data=login_data)
+            if login_response.status_code == 200:
+                if '成功' in login_response.json()['msg']:
+                    xx = login_response.json()['msg']
+                    print(xx)
+                    self.msg += xx + '\n'
+                    cookies = login_response.cookies
+                    cookies_dict = cookies.get_dict()
+                    for key, value in cookies_dict.items():
+                        ck = f"{key}={value}"
+                        self.cks += ck + ';'
+                else:
+                    xx = login_response.json()['msg']
+                    print(xx)
+                    self.msg += xx
+                    send('ikun签到通知', self.msg)
+                    exit(0)
             else:
-                xx = f"[登录]：未知错误，请检查网络或者ck有效性：{self.ck}\n\n"
+                xx = f'登录出错 未知问题'
                 print(xx)
                 self.msg += xx
-                return self.msg
-        except:
-            xx = f"[登录]：解析响应失败，请检查网络或者ck有效性：{self.ck}\n\n"
-            print(xx)
-            self.msg += xx
-            return self.msg
+                send('ikun签到通知', self.msg)
+                exit(0)
 
-    def get_sign_msg(self):
-        return self.sign()
+            checkin_url = 'https://v2.zwtg888.com/user/checkin'
+            checkin_headers = {
+                'Host': 'v2.zwtg888.com',
+                'Cookie': self.cks,
+                'sec-ch-ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Microsoft Edge";v="114"',
+                'accept': 'application/json, text/javascript, */*; q=0.01',
+                'x-requested-with': 'XMLHttpRequest',
+                'sec-ch-ua-mobile': '?0',
+                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51',
+                'sec-ch-ua-platform': '"Windows"',
+                'origin': 'https://v2.zwtg888.com',
+                'sec-fetch-site': 'same-origin',
+                'sec-fetch-mode': 'cors',
+                'sec-fetch-dest': 'empty',
+                'referer': 'https://v2.zwtg888.com/user',
+                'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
+                'Content-Type': 'application/x-www-form-urlencoded',
+            }
+            time.sleep(0.5)
+            checkin_r = requests.post(checkin_url, headers=checkin_headers)
+            if checkin_r.status_code == 200:
+                if '获得' in checkin_r.json()['msg']:
+                    xx = f"{checkin_r.json()['msg']}\n剩余流量：{checkin_r.json()['traffic']}"
+                    print(xx)
+                    self.msg += xx + '\n'
+                    send('ikun签到通知', self.msg)
+                elif "已经" in checkin_r.json()['msg']:
+                    xx = f"{checkin_r.json()['msg']}"
+                    print(xx)
+                    self.msg += xx + '\n'
+                    send('ikun签到通知', self.msg)
+                else:
+                    xx = f'签到出错'
+                    print(xx)
+                    self.msg += xx + '\n'
+                    send('ikun签到通知', self.msg)
+                    exit(0)
+            else:
+                xx = f'签到出错'
+                print(xx)
+                self.msg += xx
+                send('ikun签到通知', self.msg)
+                exit(0)
+
+        except Exception as e:
+            print(f'请求异常：{e}')
 
 
 if __name__ == '__main__':
-    token = get_environ("bd_ikun")
-    msg = ''
-    cks = token.split("&")
-    print("检测到{}个ck记录\n开始ikun签到\n".format(len(cks)))
+    ep = get_environ("bd_ikun")
+    cks = ep.split("&")
+    print("检测到{}个ck记录\n开始ikun签到\n暂时只写了签到。还没写剩余流量多少和其他信息，下次一定!\n".format(len(cks)))
     for ck_all in cks:
         ck = ck_all.split("#")
         run = Ikun(ck)
-        msg += run.get_sign_msg()
-    if send:
-        send("ikun签到通知", msg)
+        run.qd()
