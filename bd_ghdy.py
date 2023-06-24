@@ -94,7 +94,7 @@ class Ghdy:
             r = requests.get(url, headers=headers)
             if r.json()['message'] == 'success':
                 xx = f'🚀登录成功：{r.json()["data"]["rst"]["nick_name"]}'
-                self.msg += xx
+                self.msg += xx + '\n'
                 print(xx)
             if '无效' in r.json()['message']:
                 xx = f'⛔️登录失败：{r.json()["message"]}'
@@ -302,7 +302,7 @@ class Ghdy:
         if r.json()['status']:
             xx = f'✅申请成功！{r.json()["msg"]}'
             print(xx)
-            self.msg += xx + '\n'
+            self.msg += xx + '\n\n'
             send("歌画东阳通知", self.msg)
         else:
             xx = f'❌{r.json()["msg"]}'
