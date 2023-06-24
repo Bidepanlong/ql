@@ -256,12 +256,13 @@ class Ghdy:
                     self.msg += xx + '\n'
                     run.tx()
                 elif '阅读' in r.json()['msg']:
-                    xx = f'❌{r.json()["msg"]}，即将重新阅读。'
+                    xx = f'❌{r.json()["msg"]}，即将开始阅读。'
                     print(xx)
                     self.msg += xx + '\n'
                     run.get_id()
                     run.look()
                     run.chou()
+                    time.sleep(3)
                     run.tx()
                 else:
                     xx = f'⛔️{r.json()["msg"]}'
@@ -300,7 +301,7 @@ class Ghdy:
         }
         r = requests.post(url, headers=h, data=data)
         if r.json()['status']:
-            xx = f'✅申请成功！{r.json()["msg"]}'
+            xx = f'✅提现！{r.json()["msg"]}！'
             print(xx)
             self.msg += xx + '\n\n'
             send("🔔歌画东阳通知", self.msg)
@@ -309,7 +310,6 @@ class Ghdy:
             print(xx)
             self.msg += xx + '\n\n'
             send("🔔歌画东阳通知", self.msg)
-
 
 
 if __name__ == '__main__':
