@@ -303,19 +303,19 @@ class Ghdy:
             xx = f'✅申请成功！{r.json()["msg"]}'
             print(xx)
             self.msg += xx + '\n\n'
-            send("歌画东阳通知", self.msg)
+            send("🔔歌画东阳通知", self.msg)
         else:
             xx = f'❌{r.json()["msg"]}'
             print(xx)
             self.msg += xx + '\n\n'
-            send("歌画东阳通知", self.msg)
+            send("🔔歌画东阳通知", self.msg)
 
 
 
 if __name__ == '__main__':
     token = get_environ("bd_ghdy")
     cks = token.split("&")
-    print("检测到{}个ck记录\n开始歌画东阳任务\n".format(len(cks)))
+    print("🔔检测到{}个ck记录\n🔔开始歌画东阳任务\n".format(len(cks)))
     for ck_all in cks:
         ck = ck_all.split("#")
         run = Ghdy(ck)
