@@ -1,7 +1,7 @@
 """
 
 time: 2023.6.24
-cron: 2 0,12 * * *
+cron: 2 12 * * *
 new Env('歌画东阳');
 地址：https://app.tmuyun.com/webChannels/invite?inviteCode=BRHAB9&tenantId=49&accountId=6448adf9c790b07c90ca2591
 进入app-我的-抢红包或者在我的钱包-提现进去之后抓包
