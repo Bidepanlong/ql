@@ -96,7 +96,7 @@ def bark(title: str, content: str) -> None:
     if not push_config.get("BARK_PUSH"):
         print("bark 服务的 BARK_PUSH 未设置!!\n取消推送")
         return
-    print("bark 服务启动")
+    # print("bark 服务启动")
 
     if push_config.get("BARK_PUSH").startswith("http"):
         url = f'{push_config.get("BARK_PUSH")}/{urllib.parse.quote_plus(title)}/{urllib.parse.quote_plus(content)}'
@@ -123,9 +123,9 @@ def bark(title: str, content: str) -> None:
     response = requests.get(url).json()
 
     if response["code"] == 200:
-        print("bark 推送成功！")
+        print("bark 推送成功！\n")
     else:
-        print("bark 推送失败！")
+        print("bark 推送失败！\n")
 
 
 def console(title: str, content: str) -> None:
@@ -142,7 +142,7 @@ def dingding_bot(title: str, content: str) -> None:
     if not push_config.get("DD_BOT_SECRET") or not push_config.get("DD_BOT_TOKEN"):
         print("钉钉机器人 服务的 DD_BOT_SECRET 或者 DD_BOT_TOKEN 未设置!!\n取消推送")
         return
-    print("钉钉机器人 服务启动")
+    # print("钉钉机器人 服务启动")
 
     timestamp = str(round(time.time() * 1000))
     secret_enc = push_config.get("DD_BOT_SECRET").encode("utf-8")
@@ -160,9 +160,9 @@ def dingding_bot(title: str, content: str) -> None:
     ).json()
 
     if not response["errcode"]:
-        print("钉钉机器人 推送成功！")
+        print("钉钉机器人 推送成功！\n")
     else:
-        print("钉钉机器人 推送失败！")
+        print("钉钉机器人 推送失败！\n")
 
 
 def feishu_bot(title: str, content: str) -> None:
@@ -172,14 +172,14 @@ def feishu_bot(title: str, content: str) -> None:
     if not push_config.get("FSKEY"):
         print("飞书 服务的 FSKEY 未设置!!\n取消推送")
         return
-    print("飞书 服务启动")
+    # print("飞书 服务启动")
 
     url = f'https://open.feishu.cn/open-apis/bot/v2/hook/{push_config.get("FSKEY")}'
     data = {"msg_type": "text", "content": {"text": f"{title}\n\n{content}"}}
     response = requests.post(url, data=json.dumps(data)).json()
 
     if response.get("StatusCode") == 0:
-        print("飞书 推送成功！")
+        print("飞书 推送成功！\n")
     else:
         print("飞书 推送失败！错误信息如下：\n", response)
 
@@ -191,15 +191,15 @@ def go_cqhttp(title: str, content: str) -> None:
     if not push_config.get("GOBOT_URL") or not push_config.get("GOBOT_QQ"):
         print("go-cqhttp 服务的 GOBOT_URL 或 GOBOT_QQ 未设置!!\n取消推送")
         return
-    print("go-cqhttp 服务启动")
+    # print("go-cqhttp 服务启动")
 
     url = f'{push_config.get("GOBOT_URL")}?access_token={push_config.get("GOBOT_TOKEN")}&{push_config.get("GOBOT_QQ")}&message={title}\n{content}'
     response = requests.get(url).json()
 
     if response["status"] == "ok":
-        print("go-cqhttp 推送成功！")
+        print("go-cqhttp 推送成功！\n")
     else:
-        print("go-cqhttp 推送失败！")
+        print("go-cqhttp 推送失败！\n")
 
 
 def gotify(title: str, content: str) -> None:
@@ -209,16 +209,16 @@ def gotify(title: str, content: str) -> None:
     if not push_config.get("GOTIFY_URL") or not push_config.get("GOTIFY_TOKEN"):
         print("gotify 服务的 GOTIFY_URL 或 GOTIFY_TOKEN 未设置!!\n取消推送")
         return
-    print("gotify 服务启动")
+    # print("gotify 服务启动")
 
     url = f'{push_config.get("GOTIFY_URL")}/message?token={push_config.get("GOTIFY_TOKEN")}'
     data = {"title": title, "message": content, "priority": push_config.get("GOTIFY_PRIORITY")}
     response = requests.post(url, data=data).json()
 
     if response.get("id"):
-        print("gotify 推送成功！")
+        print("gotify 推送成功！\n")
     else:
-        print("gotify 推送失败！")
+        print("gotify 推送失败！\n")
 
 
 def iGot(title: str, content: str) -> None:
@@ -228,7 +228,7 @@ def iGot(title: str, content: str) -> None:
     if not push_config.get("IGOT_PUSH_KEY"):
         print("iGot 服务的 IGOT_PUSH_KEY 未设置!!\n取消推送")
         return
-    print("iGot 服务启动")
+    # print("iGot 服务启动")
 
     url = f'https://push.hellyw.com/{push_config.get("IGOT_PUSH_KEY")}'
     data = {"title": title, "content": content}
@@ -236,9 +236,9 @@ def iGot(title: str, content: str) -> None:
     response = requests.post(url, data=data, headers=headers).json()
 
     if response["ret"] == 0:
-        print("iGot 推送成功！")
+        print("iGot 推送成功！\n")
     else:
-        print(f'iGot 推送失败！{response["errMsg"]}')
+        print(f'iGot 推送失败！{response["errMsg"]}\n')
 
 
 def serverJ(title: str, content: str) -> None:
@@ -248,7 +248,7 @@ def serverJ(title: str, content: str) -> None:
     if not push_config.get("PUSH_KEY"):
         print("serverJ 服务的 PUSH_KEY 未设置!!\n取消推送")
         return
-    print("serverJ 服务启动")
+    # print("serverJ 服务启动")
 
     data = {"text": title, "desp": content.replace("\n", "\n\n")}
     if push_config.get("PUSH_KEY").index("SCT") != -1:
@@ -258,9 +258,9 @@ def serverJ(title: str, content: str) -> None:
     response = requests.post(url, data=data).json()
 
     if response.get("errno") == 0 or response.get("code") == 0:
-        print("serverJ 推送成功！")
+        print("serverJ 推送成功！\n")
     else:
-        print(f'serverJ 推送失败！错误码：{response["message"]}')
+        print(f'serverJ 推送失败！错误码：{response["message"]}\n')
 
 
 def pushdeer(title: str, content: str) -> None:
@@ -270,15 +270,15 @@ def pushdeer(title: str, content: str) -> None:
     if not push_config.get("DEER_KEY"):
         print("PushDeer 服务的 DEER_KEY 未设置!!\n取消推送")
         return
-    print("PushDeer 服务启动")
+    # print("PushDeer 服务启动")
     data = {"text": title, "desp": content, "type": "markdown", "pushkey": push_config.get("DEER_KEY")}
     url = 'https://api2.pushdeer.com/message/push'
     response = requests.post(url, data=data).json()
 
     if len(response.get("content").get("result")) > 0:
-        print("PushDeer 推送成功！")
+        print("PushDeer 推送成功！\n")
     else:
-        print("PushDeer 推送失败！错误信息：", response)
+        print("PushDeer 推送失败！错误信息：", response + '\n')
 
 
 def pushplus_bot(title: str, content: str) -> None:
@@ -288,7 +288,7 @@ def pushplus_bot(title: str, content: str) -> None:
     if not push_config.get("PUSH_PLUS_TOKEN"):
         print("PUSHPLUS 服务的 PUSH_PLUS_TOKEN 未设置!!\n取消推送")
         return
-    print("PUSHPLUS 服务启动")
+    # print("PUSHPLUS 服务启动")
 
     url = "http://www.pushplus.plus/send"
     data = {
@@ -302,7 +302,7 @@ def pushplus_bot(title: str, content: str) -> None:
     response = requests.post(url=url, data=body, headers=headers).json()
 
     if response["code"] == 200:
-        print("PUSHPLUS 推送成功！")
+        print("PUSHPLUS 推送成功！\n")
 
     else:
 
@@ -311,10 +311,10 @@ def pushplus_bot(title: str, content: str) -> None:
         response = requests.post(url=url_old, data=body, headers=headers).json()
 
         if response["code"] == 200:
-            print("PUSHPLUS(hxtrip) 推送成功！")
+            print("PUSHPLUS(hxtrip) 推送成功！\n")
 
         else:
-            print("PUSHPLUS 推送失败！")
+            print("PUSHPLUS 推送失败！\n")
 
 
 def qmsg_bot(title: str, content: str) -> None:
@@ -324,16 +324,16 @@ def qmsg_bot(title: str, content: str) -> None:
     if not push_config.get("QMSG_KEY") or not push_config.get("QMSG_TYPE"):
         print("qmsg 的 QMSG_KEY 或者 QMSG_TYPE 未设置!!\n取消推送")
         return
-    print("qmsg 服务启动")
+    # print("qmsg 服务启动")
 
     url = f'https://qmsg.zendee.cn/{push_config.get("QMSG_TYPE")}/{push_config.get("QMSG_KEY")}'
     payload = {"msg": f'{title}\n\n{content.replace("----", "-")}'.encode("utf-8")}
     response = requests.post(url=url, params=payload).json()
 
     if response["code"] == 0:
-        print("qmsg 推送成功！")
+        print("qmsg 推送成功！\n")
     else:
-        print(f'qmsg 推送失败！{response["reason"]}')
+        print(f'qmsg 推送失败！{response["reason"]}\n')
 
 
 def wecom_app(title: str, content: str) -> None:
@@ -347,7 +347,7 @@ def wecom_app(title: str, content: str) -> None:
     if 4 < len(QYWX_AM_AY) > 5:
         print("QYWX_AM 设置错误!!\n取消推送")
         return
-    print("企业微信 APP 服务启动")
+    # print("企业微信 APP 服务启动")
 
     corpid = QYWX_AM_AY[0]
     corpsecret = QYWX_AM_AY[1]
@@ -366,9 +366,9 @@ def wecom_app(title: str, content: str) -> None:
         response = wx.send_mpnews(title, content, media_id, touser)
 
     if response == "ok":
-        print("企业微信推送成功！")
+        print("企业微信推送成功！\n")
     else:
-        print("企业微信推送失败！错误信息如下：\n", response)
+        print("企业微信推送失败！错误信息如下：\n", response, '\n')
 
 
 class WeCom:
@@ -439,7 +439,7 @@ def wecom_bot(title: str, content: str) -> None:
     if not push_config.get("QYWX_KEY"):
         print("企业微信机器人 服务的 QYWX_KEY 未设置!!\n取消推送")
         return
-    print("企业微信机器人服务启动")
+    # print("企业微信机器人服务启动")
 
     url = f"https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key={push_config.get('QYWX_KEY')}"
     headers = {"Content-Type": "application/json;charset=utf-8"}
@@ -449,9 +449,9 @@ def wecom_bot(title: str, content: str) -> None:
     ).json()
 
     if response["errcode"] == 0:
-        print("企业微信机器人推送成功！")
+        print("企业微信机器人推送成功！\n")
     else:
-        print("企业微信机器人推送失败！")
+        print("企业微信机器人推送失败！\n")
 
 
 def telegram_bot(title: str, content: str) -> None:
@@ -461,7 +461,7 @@ def telegram_bot(title: str, content: str) -> None:
     if not push_config.get("TG_BOT_TOKEN") or not push_config.get("TG_USER_ID"):
         print("tg 服务的 bot_token 或者 user_id 未设置!!\n取消推送")
         return
-    print("tg 服务启动")
+    # print("tg 服务启动")
 
     if push_config.get("TG_API_HOST"):
         url = f"https://{push_config.get('TG_API_HOST')}/bot{push_config.get('TG_BOT_TOKEN')}/sendMessage"
@@ -494,9 +494,9 @@ def telegram_bot(title: str, content: str) -> None:
     ).json()
 
     if response["ok"]:
-        print("tg 推送成功！")
+        print("tg 推送成功！\n")
     else:
-        print("tg 推送失败！")
+        print("tg 推送失败！\n")
 
 
 def one() -> str:
