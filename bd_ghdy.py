@@ -210,7 +210,7 @@ class Ghdy:
                     print(xx)
                     self.msg += xx + '\n'
                     exit(0)
-            xx = f'✅浏览完成，准备开始抽红包吧'
+            xx = f'✅浏览完成，准备开始抽红包吧！'
             print(xx)
             self.msg += xx + '\n'
         except Exception as e:
@@ -246,7 +246,7 @@ class Ghdy:
             }
             r = requests.post(url, headers=headers, data=data)
             if r.json()['status']:
-                xx = f'✅抽奖成功，{r.json()["data"]["name"]}'
+                xx = f'✅抽奖成功：{r.json()["data"]["name"]}'
                 print(xx)
                 self.msg += xx + '\n'
             elif not r.json()['status']:
