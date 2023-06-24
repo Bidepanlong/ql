@@ -310,7 +310,7 @@ class Ghdy:
 
 
 if __name__ == '__main__':
-    token = '644641e43cbc2876a837d3c5#644641e43cbc2876a837d3c6'
+    token = get_environ("bd_ghdy")
     cks = token.split("&")
     print("检测到{}个ck记录\n开始歌画东阳任务\n".format(len(cks)))
     for ck_all in cks:
