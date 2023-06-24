@@ -123,9 +123,9 @@ def bark(title: str, content: str) -> None:
     response = requests.get(url).json()
 
     if response["code"] == 200:
-        print("bark 推送成功！\n")
+        print("bark 推送成功！")
     else:
-        print("bark 推送失败！\n")
+        print("bark 推送失败！")
 
 
 def console(title: str, content: str) -> None:
@@ -160,9 +160,9 @@ def dingding_bot(title: str, content: str) -> None:
     ).json()
 
     if not response["errcode"]:
-        print("钉钉机器人 推送成功！\n")
+        print("钉钉机器人 推送成功！")
     else:
-        print("钉钉机器人 推送失败！\n")
+        print("钉钉机器人 推送失败！")
 
 
 def feishu_bot(title: str, content: str) -> None:
@@ -179,7 +179,7 @@ def feishu_bot(title: str, content: str) -> None:
     response = requests.post(url, data=json.dumps(data)).json()
 
     if response.get("StatusCode") == 0:
-        print("飞书 推送成功！\n")
+        print("飞书 推送成功！")
     else:
         print("飞书 推送失败！错误信息如下：\n", response)
 
@@ -197,9 +197,9 @@ def go_cqhttp(title: str, content: str) -> None:
     response = requests.get(url).json()
 
     if response["status"] == "ok":
-        print("go-cqhttp 推送成功！\n")
+        print("go-cqhttp 推送成功！")
     else:
-        print("go-cqhttp 推送失败！\n")
+        print("go-cqhttp 推送失败！")
 
 
 def gotify(title: str, content: str) -> None:
@@ -216,9 +216,9 @@ def gotify(title: str, content: str) -> None:
     response = requests.post(url, data=data).json()
 
     if response.get("id"):
-        print("gotify 推送成功！\n")
+        print("gotify 推送成功！")
     else:
-        print("gotify 推送失败！\n")
+        print("gotify 推送失败！")
 
 
 def iGot(title: str, content: str) -> None:
@@ -236,9 +236,9 @@ def iGot(title: str, content: str) -> None:
     response = requests.post(url, data=data, headers=headers).json()
 
     if response["ret"] == 0:
-        print("iGot 推送成功！\n")
+        print("iGot 推送成功！")
     else:
-        print(f'iGot 推送失败！{response["errMsg"]}\n')
+        print(f'iGot 推送失败！{response["errMsg"]}')
 
 
 def serverJ(title: str, content: str) -> None:
@@ -258,9 +258,9 @@ def serverJ(title: str, content: str) -> None:
     response = requests.post(url, data=data).json()
 
     if response.get("errno") == 0 or response.get("code") == 0:
-        print("serverJ 推送成功！\n")
+        print("serverJ 推送成功！")
     else:
-        print(f'serverJ 推送失败！错误码：{response["message"]}\n')
+        print(f'serverJ 推送失败！错误码：{response["message"]}')
 
 
 def pushdeer(title: str, content: str) -> None:
@@ -276,9 +276,9 @@ def pushdeer(title: str, content: str) -> None:
     response = requests.post(url, data=data).json()
 
     if len(response.get("content").get("result")) > 0:
-        print("PushDeer 推送成功！\n")
+        print("PushDeer 推送成功！")
     else:
-        print("PushDeer 推送失败！错误信息：", response + '\n')
+        print("PushDeer 推送失败！错误信息：", response)
 
 
 def pushplus_bot(title: str, content: str) -> None:
@@ -302,7 +302,7 @@ def pushplus_bot(title: str, content: str) -> None:
     response = requests.post(url=url, data=body, headers=headers).json()
 
     if response["code"] == 200:
-        print("PUSHPLUS 推送成功！\n")
+        print("PUSHPLUS 推送成功！")
 
     else:
 
@@ -311,10 +311,10 @@ def pushplus_bot(title: str, content: str) -> None:
         response = requests.post(url=url_old, data=body, headers=headers).json()
 
         if response["code"] == 200:
-            print("PUSHPLUS(hxtrip) 推送成功！\n")
+            print("PUSHPLUS(hxtrip) 推送成功！")
 
         else:
-            print("PUSHPLUS 推送失败！\n")
+            print("PUSHPLUS 推送失败！")
 
 
 def qmsg_bot(title: str, content: str) -> None:
@@ -331,9 +331,9 @@ def qmsg_bot(title: str, content: str) -> None:
     response = requests.post(url=url, params=payload).json()
 
     if response["code"] == 0:
-        print("qmsg 推送成功！\n")
+        print("qmsg 推送成功！")
     else:
-        print(f'qmsg 推送失败！{response["reason"]}\n')
+        print(f'qmsg 推送失败！{response["reason"]}')
 
 
 def wecom_app(title: str, content: str) -> None:
@@ -366,9 +366,9 @@ def wecom_app(title: str, content: str) -> None:
         response = wx.send_mpnews(title, content, media_id, touser)
 
     if response == "ok":
-        print("企业微信推送成功！\n")
+        print("企业微信推送成功！")
     else:
-        print("企业微信推送失败！错误信息如下：\n", response, '\n')
+        print("企业微信推送失败！错误信息如下：\n", response)
 
 
 class WeCom:
@@ -449,9 +449,9 @@ def wecom_bot(title: str, content: str) -> None:
     ).json()
 
     if response["errcode"] == 0:
-        print("企业微信机器人推送成功！\n")
+        print("企业微信机器人推送成功！")
     else:
-        print("企业微信机器人推送失败！\n")
+        print("企业微信机器人推送失败！")
 
 
 def telegram_bot(title: str, content: str) -> None:
@@ -494,9 +494,9 @@ def telegram_bot(title: str, content: str) -> None:
     ).json()
 
     if response["ok"]:
-        print("tg 推送成功！\n")
+        print("tg 推送成功！")
     else:
-        print("tg 推送失败！\n")
+        print("tg 推送失败！")
 
 
 def one() -> str:
