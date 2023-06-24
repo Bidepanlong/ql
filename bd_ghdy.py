@@ -303,10 +303,13 @@ class Ghdy:
             xx = f'✅申请成功！{r.json()["msg"]}'
             print(xx)
             self.msg += xx + '\n'
+            send("歌画东阳通知", self.msg)
         else:
             xx = f'❌{r.json()["msg"]}'
             print(xx)
-            self.msg += xx + '\n'
+            self.msg += xx + '\n\n'
+            send("歌画东阳通知", self.msg)
+
 
 
 if __name__ == '__main__':
