@@ -150,8 +150,7 @@ class Ikun():
 
 
 if __name__ == '__main__':
-    # ep = get_environ("bd_ikun")
-    ep = '951150259@qq.com#Bidepan0.0'
+    ep = get_environ("bd_ikun")
     cks = ep.split("&")
     print("检测到{}个ck记录\n开始ikun签到\n暂时只写了签到。还没写剩余流量多少和其他信息，下次一定!\n".format(len(cks)))
     for ck_all in cks:
