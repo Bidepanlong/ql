@@ -1,9 +1,9 @@
 """
 
-time：2023.5.14
+time：2023.7.8
 cron: 23 0 * * *
 new Env('ikuuu签到');
-地址：https://ikuuu.eu/
+地址：https://ikuuu.art/
 环境变量 bd_ikuuu = 邮箱#密码
 多账号新建变量或者用 & 分开
 
@@ -55,9 +55,9 @@ class ikuuu():
 
     def sign(self):
         time.sleep(0.5)
-        url = "https://ikuuu.eu/user/checkin"
-        url1 = 'https://ikuuu.eu/user'
-        login_url = 'https://ikuuu.eu/auth/login'
+        url = "https://ikuuu.art/user/checkin"
+        url1 = 'https://ikuuu.art/user'
+        login_url = 'https://ikuuu.art/auth/login'
 
         login_header = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
