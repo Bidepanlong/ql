@@ -53,11 +53,11 @@ run_yc = False
 
 # 任务选择
 ################################################
-# 要运行的任务配置 Trule 不运行配置 False。
+# 要运行的任务配置 True 不运行配置 False。
 # 多任务可能会增加黑号几率，自己配置是否运行
 
 # 每日签到
-run_mrqd = False
+run_mrqd = True
 # 小说签到
 run_xsqd = False
 # 吃饭补贴
