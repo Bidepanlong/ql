@@ -2,7 +2,7 @@
 
 time：2023.7.31
 cron: 59 10,14,15,16 * * *
-new Env('美团抢神券');
+new Env('美团抢神券测试);
 卡密发卡网：fk.bedee.top
 ck环境变量 bd_mt 多账户新建变量或者&分割
 卡密环境变量 bd_mtkm
