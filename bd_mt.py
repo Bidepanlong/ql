@@ -1,10 +1,16 @@
-# 卡密发卡网：fk.bedee.top
-# ck环境变量 bd_mt 多账户新建变量或者&分割
-# 卡密环境变量 bd_mtkm
-# 抓包 ：微信打开 http://dpurl.cn/De93jW6z
-# 抓https://promotion.waimai.meituan.com/lottery/limitcouponcomponent/info
-# 里面的完整cookie
+"""
 
+time：2023.7.31
+cron: 59 10,14,15,16 * * *
+new Env('美团抢神券');
+卡密发卡网：fk.bedee.top
+ck环境变量 bd_mt 多账户新建变量或者&分割
+卡密环境变量 bd_mtkm
+抓包 ：微信打开 http://dpurl.cn/De93jW6z
+抓https://promotion.waimai.meituan.com/lottery/limitcouponcomponent/info
+里面的完整cookie
+
+"""
 try:
     import marshal, lzma, gzip, bz2, binascii, zlib;
 
