@@ -1,14 +1,15 @@
 """
-————————需要py3.10版本以上才能运行，青龙2.14以上应该可以————————
-time: 2023.7.26
+————————需要py3.10版本才能运行，青龙新版本可以运行————————
+time: 2023.8.17
 cron: 2 8 * * *
 new Env('望潮');
 地址：https://tzapp.taizhou.com.cn/webChannels/invite?inviteCode=BYEJ29&tenantId=64&accountId=648e0c348f26b175483bfa6c
 进入app-首页-阅读有礼，先点击右下角抽奖，绑定zfb号
 ！！！！！一定要先去绑定zfb号！！！！！
 抓包域名: xmt.taizhou.com.cn/prod-api/user-read/app/login
-抓包域名后面的: sessionId的值
-环境变量名称：bd_wc = sessionId的值
+抓包域名后面的: sessionId的值和deviceId的值
+环境变量名称：bd_wc = sessionId的值#deviceId的值 中间用 # 分割
+例如 bd_wc = 64dd8a6a3f293a40c8ec04e6#00000000-647e-1fe0-ffff-ffff9714e028
 多账号新建变量或者用 & 分开
 
 """
