@@ -1,6 +1,6 @@
 """
 
-time：2023.10.24
+time：2023.10.31
 定时：一天至少3-5次
 正常是每天700+币
 new Env('美团小团币游戏中心');
@@ -10,10 +10,10 @@ new Env('美团小团币游戏中心');
 并发变量: bd_xtbbf = 1   默认不设置为1
 
 更新日志：
+10.31: 修复报错
 10.24: 关闭授权，开源
 9.26: 优化报错，并发变量
 9.24: 新增账号并发运行
-9.23: 新增每日获取小团币，异常重试
 
 """
 import random
@@ -113,14 +113,9 @@ class Mttb:
         try:
             url = 'https://game.meituan.com/mgc/gamecenter/skuExchange/resource/counts?sceneId=3&gameId=10102'
             self.t_h = {
-                'Accept': 'application/json, text/plain, */*',
-                'x-requested-with': 'XMLHttpRequest',
                 'User-Agent': self.ua,
-                'Content-Type': 'application/json;charset=UTF-8',
-                'mtgsig': '',
                 'actoken': self.actoken,
                 'mtoken': self.ck,
-                'cookie': f'token={self.ck}'
             }
             r = requests.get(url, headers=self.t_h)
             rj = r.json()
@@ -204,7 +199,7 @@ class Mttb:
 
     def post_id(self):
         try:
-            url = 'https://game.meituan.com/mgc/gamecenter/front/api/v1/mgcUser/task/receiveMgcTaskReward?yodaReady=h5&csecplatform=4&csecversion=2.1.0&mtgsig={}'
+            url = 'https://game.meituan.com/mgc/gamecenter/front/api/v1/mgcUser/task/receiveMgcTaskReward'
             data = {
                 "taskId": self.id,
                 "externalStr": "",
@@ -229,7 +224,7 @@ class Mttb:
 
 if __name__ == '__main__':
     print = partial(print, flush=True)
-    print('🔔当前版本V10.24\n🔔tg频道：https://t.me/dzr_byg')
+    print('🔔当前版本V10.31\n🔔tg频道：https://t.me/dzr_byg')
 
     token = os.environ.get("bd_mttoken")
     if token is None:
@@ -243,7 +238,7 @@ if __name__ == '__main__':
     bf = os.environ.get("bd_xtbbf")
     if bf is None:
         print(f'⛔️为设置并发变量，默认1')
-        bf = 2
+        bf = 1
 
     print(f'✅获取到{len(tokens)}个账号')
     print(f'🔔设置并发数: {bf}')
