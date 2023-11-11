@@ -7,7 +7,7 @@ new Env('美团小团币游戏中心');
 抓包小程序或者app或者网页的token=Agxxxx  只要token后面的值
 环境变量: 名称：bd_mttoken   值：Agxxxxxxxxxx
 多账号新建变量或者用 & 分开
-并发变量: bd_xtbbf = 1   默认不设置为1
+并发变量: bd_xtbbf  默认不设置为1
 
 更新日志：
 10.31: 修复报错
