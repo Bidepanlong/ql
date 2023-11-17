@@ -16,7 +16,7 @@ x-argus和x-ladon和user-agent在请求头里面找
 # 账号配置
 ################################################
 # 卡密
-km = ''
+km = 'bd_jrttcs_af534f6a31c7b6857fc7d9abef18cfd8'
 # url参数
 url = ''
 # cookie参数
