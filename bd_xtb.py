@@ -1,7 +1,7 @@
 """
 time：2023.11.30
 定时：一天一次就行了
-new Env('彼得小团币卡密版本')
+new Env('彼得小团币')
 抓包小程序或者app或者网页的token=Agxxxx  只要token后面的值
 环境变量: 名称：bd_mttoken   值：Agxxxxxxxxxx
 多账号新建变量或者用 & 分开
