@@ -154,7 +154,7 @@ def console(title: str, content: str) -> None:
     """
     使用 控制台 推送消息。
     """
-    # print(f"{title}\n\n{content}")
+    print(f"{title}\n\n{content}")
 
 
 def dingding_bot(title: str, content: str) -> None:
@@ -215,7 +215,7 @@ def go_cqhttp(title: str, content: str) -> None:
         return
     print("go-cqhttp 服务启动")
 
-    url = f'{push_config.get("GOBOT_URL")}?access_token={push_config.get("GOBOT_TOKEN")}&{push_config.get("GOBOT_QQ")}&message={title}\n{content}'
+    url = f'{push_config.get("GOBOT_URL")}?access_token={push_config.get("GOBOT_TOKEN")}&{push_config.get("GOBOT_QQ")}&message=标题:{title}\n内容:{content}'
     response = requests.get(url).json()
 
     if response["status"] == "ok":
