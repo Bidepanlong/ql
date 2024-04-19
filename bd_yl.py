@@ -10,7 +10,7 @@ new Env('安装依赖（运行脚本前运行）');
 import importlib.util
 import os
 
-yl = ['requests', 'bs4', 'user_agent']
+yl = ['cryptograph', 'user_agent', ]
 for i in yl:
     spec = importlib.util.find_spec(i)
     if spec is None:
