@@ -1959,7 +1959,6 @@ class Mttb:
                 if self.startcxtb():
                     if self.coin_login():
                         self.runq_jrtb()
-                        print(self.startmsg)
                         if self.coins > jrtb_nums:
                             self.startmsg += f'🚀今日团币已经达到{jrtb_nums}不再运行！\n'
                             self.endmsg += f'🆔账号{self.num}-{self.name}({self.usid}) 🎁今天已经跑过啦\n'
